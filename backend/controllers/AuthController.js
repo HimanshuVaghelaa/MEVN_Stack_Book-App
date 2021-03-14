@@ -11,9 +11,9 @@ exports.register = [
   body("email")
     .isLength({ min: 1 })
     .trim()
-    .withMessage("Email must be specified.")
+    .withMessage("Email must be specified")
     .isEmail()
-    .withMessage("Email must be a valid email address.")
+    .withMessage("Email must be a valid email address")
     .custom((value) => {
       return UserModel.findOne({ email: value }).then((user) => {
         if (user) {
@@ -24,7 +24,7 @@ exports.register = [
   body("password")
     .isLength({ min: 6 })
     .trim()
-    .withMessage("Password must be 6 characters or greater."),
+    .withMessage("Password must be 6 characters or greater"),
   // Sanitize fields.
   sanitizeBody("email").escape(),
   sanitizeBody("password").escape(),
@@ -37,7 +37,7 @@ exports.register = [
         // Display sanitized values/errors messages.
         return apiResponse.validationErrorWithData(
           res,
-          "Validation Error.",
+          "Validation Error",
           errors.array()
         );
       } else {
@@ -59,7 +59,7 @@ exports.register = [
             };
             return apiResponse.successResponseWithData(
               res,
-              "Registration Success.",
+              "Registration Success",
               userData
             );
           });
@@ -76,13 +76,13 @@ exports.login = [
   body("email")
     .isLength({ min: 1 })
     .trim()
-    .withMessage("Email must be specified.")
+    .withMessage("Email must be specified")
     .isEmail()
-    .withMessage("Email must be a valid email address."),
+    .withMessage("Email must be a valid email address"),
   body("password")
     .isLength({ min: 1 })
     .trim()
-    .withMessage("Password must be specified."),
+    .withMessage("Password must be specified"),
   sanitizeBody("email").escape(),
   sanitizeBody("password").escape(),
   (req, res) => {
@@ -91,7 +91,7 @@ exports.login = [
       if (!errors.isEmpty()) {
         return apiResponse.validationErrorWithData(
           res,
-          "Validation Error.",
+          "Validation Error",
           errors.array()
         );
       } else {
@@ -117,13 +117,13 @@ exports.login = [
                   userData.token = jwt.sign(jwtPayload, secret, jwtData);
                   return apiResponse.successResponseWithData(
                     res,
-                    "Login Success.",
+                    "Login Success",
                     userData
                   );
                 } else {
                   return apiResponse.unauthorizedResponse(
                     res,
-                    "Email or Password wrong."
+                    "Email or Password wrong"
                   );
                 }
               }
@@ -131,7 +131,7 @@ exports.login = [
           } else {
             return apiResponse.unauthorizedResponse(
               res,
-              "Email or Password wrong."
+              "Email or Password wrong"
             );
           }
         });

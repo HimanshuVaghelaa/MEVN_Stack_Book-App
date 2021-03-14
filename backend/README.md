@@ -50,10 +50,12 @@ npm install
 
 ## How to run
 
+#### Run MongoDB First
+
 ### Running API server locally
 
 ```bash
-npm run dev
+npm start
 ```
 
 You will know server is running by checking the output of the command `npm run dev`
